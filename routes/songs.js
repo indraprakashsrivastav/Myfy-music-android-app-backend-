@@ -4,9 +4,9 @@ const Song = require('../models/Song');
 
 // Create a song
 router.post('/', async (req, res) => {
-    const { title, artist } = req.body;
+    const { title, artist, album, duration, releaseDate, spotifyId, audioUrl, imgUrl } = req.body;
     try {
-        const song = new Song({ title, artist });
+        const song = new Song({ title, artist, album, duration, releaseDate, spotifyId, audioUrl, imgUrl });
         await song.save();
         res.status(201).json(song);
     } catch (error) {

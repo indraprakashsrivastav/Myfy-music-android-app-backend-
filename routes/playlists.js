@@ -56,7 +56,7 @@ router.patch('/:id/add-song', authenticate, async (req, res) => {
     console.log('Request body:', req.body);
 
     const { id } = req.params;
-    const { songId } = req.body;
+    const { song } = req.body; // Assume song is an object with song details
 
     try {
         const playlist = await Playlist.findById(id);
@@ -65,7 +65,7 @@ router.patch('/:id/add-song', authenticate, async (req, res) => {
             return res.status(403).json({ error: 'Access denied' }); // Check if user has access
         }
 
-        playlist.songs.push(songId);
+        playlist.songs.push(song);
         await playlist.save();
         res.json(playlist);
     } catch (error) {
@@ -96,7 +96,7 @@ router.patch('/:id/remove-song', authenticate, async (req, res) => {
             return res.status(403).json({ error: 'Access denied' });
         }
 
-        playlist.songs.pull(songId);
+        playlist.songs = playlist.songs.filter(song => song._id.toString() !== songId);
         await playlist.save();
         res.json(playlist);
     } catch (error) {

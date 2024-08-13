@@ -53,7 +53,9 @@ const fetchSpotifySong = async (spotifyId) => {
             album: album.name,
             duration: duration_ms,
             releaseDate: release_date,
-            spotifyId
+            spotifyId,
+            imageUrl: track.album.images[0]?.url || '',  // Get the largest image URL
+            audioUrl: track.preview_url || ''  // Preview URL
         });
         await song.save();
 

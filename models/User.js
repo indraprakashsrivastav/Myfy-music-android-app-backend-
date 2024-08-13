@@ -5,7 +5,8 @@ const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     passwordHash: { type: String, required: true },
-    playlists: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Playlist' }]
+    playlists: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Playlist' }],
+    admin: { type: Boolean, default: false } // New field to indicate admin status
 });
 
 // Hash password before saving
